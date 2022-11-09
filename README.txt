@@ -1,4 +1,4 @@
-what is DES?
+WHAT IS DES?
 Enter, Wikipedia: “A discrete-event simulation (DES) models the operation of a system as
 a (discrete) sequence of events in time. Each event occurs at a particular instant in time and
 marks a change of state in the system. Between consecutive events, no change in the system
@@ -55,3 +55,72 @@ earlier is served before. If they arrived at the same time as well, then the one
 lower ID is served first
 • For all of the services, players visit the first available staff for the service (the available
 staff with the smallest ID) when they leave the queue.
+• Each player is allowed to take at most 3 massage service. Hence, whenever a player
+attempts to enter the massage queue 4th time, this is called an “invalid attempt”.
+• Since it is hard for the players to estimate how much time they spend in the queues,
+there could be some cases such that players may try to come to the training or massage
+when they are already in the training, physiotherapy or massage process. These attempts
+should be “canceled” so they are called “canceled attempts”.
+• One can enter the physiotherapy queue only after the training, no direct entrance is
+possible.
+Keep also in mind that internal events, such as leaving
+the training, should also be triggered by the simulation. Roger Federer expects you to simulate
+the training procedure of ExcelFed using these external and internal discrete events and collect
+some statistics.
+
+Input
+Roger provides all simulation configuration files in the following format:
+• The first line contains an integer N that denotes the total number of players in ExcelFed.
+• Each of the next N line contains two integer: the ID of the player and his/her skill level.
+These players will be given in sorted order by ID.
+• The next line is the line of an integer A that denotes the total number of arrival to the
+training and massage.
+• Each of the next A lines contains a character At denoting the type of arrival (either
+“m”(massage) or “t”(training)), an integer denoting the ID of the player, the second T
+that denotes the arrival time, and d duration of the process. These events will not be
+given in sorted order.
+• The next line comprises an integer Sp that denotes the number of physiotherapists and
+a list of floats of size Sp. The ith element of the list denotes the service time of the ith
+physiotherapist.
+• The last line contains two integers: Sc that denotes the number of training coaches and
+Sm that denotes the number of masseurs.
+
+Output
+Roger needs you to collect the following statistics to evaluate the configuration and output
+them in separate lines, in the order they are given. Please round the statistics to exactly 3
+decimal points. In case you cannot report any of the following 15 statistics, print -2 for each
+of them in order to adhere the output format.
+1. Maximum length of the training queue.
+2. Maximum length of the physiotherapy queue.
+3. Maximum length of the massage queue.
+4. Average waiting time in the training queue.
+5. Average waiting time in the physiotherapy queue.
+6. Average waiting time in the massage queue.
+7. Average training time.
+8. Average physiotherapy time.
+9. Average massage time.
+10. Average turnaround time (Turnaround time: Total time passed from the training queue
+entrance until leaving the physiotherapy service.) To compute, sum all turnaround times
+and divide it by the number of turnarounds, which is also equal to the number of total
+training arrivals.
+11. ID of the player who spent the most time in the physiotherapy queue and the waiting
+time of that player in seconds. If more than one player spent the same amount of time,
+choose the one with the smallest ID.
+12. ID of the player who spent the least time in the massage queue and the waiting time of
+that player in seconds, among the ones who took three massage services. If more than
+one player spent the same amount of time, choose the one with the smallest ID. If there
+is no player that took three massage services, print -1 for both.
+13. Total number of invalid attempts to get a message service.
+14. Total number of canceled attempts including both training and massage attempts.
+15. Total seconds passed during the whole simulation.
+Nadal also showed the courtesy to share the expected output for the input in Table 2 with
+explanations. He also showed the progress of queues and services in Table 3 where the numbers
+in the parenthesis in the“service” columns represent the number of remaining seconds to finish
+the process.
+
+Java Project Outline
+
+javac Project/src/*.java -d Project/bin –release 16
+The input and output files can be at any folder. Design your code in order to accept full
+path for file arguments. Your program will be run with below command:
+java projectmain <inputfile> <outputfile>
